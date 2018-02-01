@@ -1,0 +1,8 @@
+/app/bower_components
+/node_modules
+/public/storage
+/storage/
+/vendor
+/.idea
+.env
+.idea

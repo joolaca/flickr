@@ -1,0 +1,52 @@
+<md-dialog aria-label="Edit Image" style="width: 80%">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Edit Image</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon ng-click="answer('answer')" aria-label="Close dialog">
+                        X
+                    </md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+
+
+            <p>
+                <div class="col-md-2"> ID </div>
+                <div class="col-md-10"> <%photo_info.id%> </div>
+            </p>
+
+            <p>
+                <div class="col-md-2"> owner username </div>
+                <div class="col-md-10"> <%photo_info.owner.username%>
+                </div>
+            </p>
+
+            <p class="row">
+                <div class="col-md-2"> title </div>
+                <div class="col-md-10">
+                    <input type="text" ng-model="photo_info.title">
+                </div>
+            </p>
+
+            <p class="row">
+                <div class="col-md-2"> description </div>
+                <div class="col-md-10">
+                    <textarea name="" id="" cols="30" rows="10" ng-model="photo_info.description"></textarea>
+                </div>
+            </p>
+
+
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="setImageInfo()">
+                Set Inage Info
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
