@@ -1,2 +1,2 @@
-npm install
-bower install
+clone repository
+composer update
