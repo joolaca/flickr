@@ -152,7 +152,7 @@ class FlickrController extends Controller
         }
 
         $id_flickr = $f->sync_upload('C:\1.jpg', $request->title, $request->description);
-
+        // bad request, invalid signature,  to be continued
     }
 
 

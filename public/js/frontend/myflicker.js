@@ -3,57 +3,14 @@ var app = angular.module('MyFlickrApp', ['ngMaterial'], function($interpolatePro
     $interpolateProvider.endSymbol('%>');
 
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8;';
-    //$httpProvider.interceptors.push('authHttpResponseInterceptor');
+
 });
-app.config(['$httpProvider',function($httpProvider) {
-    //Http Intercpetor to check auth failures for xhr requests
-    $httpProvider.interceptors.push('myHttpResponseInterceptor');
-
-}]);
-/*
-app.config(['$qProvider', function ($qProvider) {
-    $qProvider.errorOnUnhandledRejections(false);
-}]);*/
 
 
-
-app.factory('myHttpResponseInterceptor', ['$q', '$location', function($q, $location) {
-    return function(promise) {
-       /* var success = function(response) {
-            if (response.status === 302) {
-                console.log(response)
-
-            } else {
-
-                return response;
-            }
-            return response;
-        };*/
-
-        /*var error = function(response) {
-            if (response.status == 401) {
-                if (response.status === 302) {
-                    alert("error " + response.status);
-                    $location.path('/public/login.html');
-                    return $q.reject(response);
-                } else {
-                    alert("error  " + response.status);
-                    return $q.reject(response);
-                }
-
-            }
-
-            return $q.reject(response);
-        };*/
-
-        return promise.then(success, error);
-    };
-}]);
 
 app.controller('MyFlickerController', function ($http,$scope, $mdDialog, ImageInfoService ) {
 
     $scope.showEdit = function(event,photo_id) {
-
 
         ImageInfoService.getData(photo_id).then(function (result) {
 
@@ -73,8 +30,9 @@ app.controller('MyFlickerController', function ($http,$scope, $mdDialog, ImageIn
         function DialogCtrl($scope,$mdDialog,result,$window) {
             $scope.photo_info = result.data.photo;
 
-            $scope.setImageInfo = function() {
+            $scope.setImageInfo = function($event) {
                 ImageInfoService.setImageInfo($scope.photo_info).then(function (result) {
+
                     if(result.data.need_redirect){
                         $window.location.href = result.data.url;
                     }
@@ -86,7 +44,9 @@ app.controller('MyFlickerController', function ($http,$scope, $mdDialog, ImageIn
                                 .clickOutsideToClose(true)
                                 .textContent('Seved')
                                 .ok('Got it!')
-                                .targetEvent(ev)
+                                .targetEvent(event)
+
+
                         );
                     }
 
